@@ -166,7 +166,7 @@
             </div>
 
             <p class="text-xs text-center text-white/80 mt-6 tracking-wider">
-                *Melayanai Dengan Hati.*
+                *Melayani Dengan Hati.*
             </p>
         </div>
     </div>
