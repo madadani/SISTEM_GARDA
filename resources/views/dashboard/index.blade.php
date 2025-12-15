@@ -191,7 +191,7 @@
         <!-- Recent Activity -->
         <div class="bg-white rounded-xl shadow-md p-6">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h3>
-            <div class="space-y-4">
+            <div id="recent-activities-container" class="space-y-4">
                 @forelse($recentActivities as $activity)
                 <div class="flex items-start space-x-3 pb-4 border-b border-gray-100">
                     <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 {{ $activity['color'] }}">
@@ -615,6 +615,31 @@
                     const isPositive = percentageChange >= 0;
                     scanChange.className = `text-sm ${isPositive ? 'text-green-600' : 'text-red-600'} font-medium`;
                     scanChange.innerHTML = `${isPositive ? '↑' : '↓'} ${Math.abs(percentageChange)}%`;
+                }
+                
+                // Update recent activities - only if this scan has patient data
+                if (data.recent_activities && data.recent_activities.length > 0) {
+                    const activitiesContainer = document.getElementById('recent-activities-container');
+                    if (activitiesContainer) {
+                        let activitiesHtml = '';
+                        data.recent_activities.forEach(activity => {
+                            activitiesHtml += `
+                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors fade-in">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 ${activity.color} rounded-full flex items-center justify-center">
+                                            ${activity.icon}
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-gray-900">${activity.title}</p>
+                                        <p class="text-xs text-gray-500 truncate">${activity.subtitle}</p>
+                                        <p class="text-xs text-gray-400 mt-1">${activity.time}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        activitiesContainer.innerHTML = activitiesHtml;
+                    }
                 }
                 
                 // Mark scan as processed
