@@ -197,6 +197,8 @@ class DriverPointController extends Controller
                 'destination' => $validated['destination'],
                 'driver_name' => $driver->name,
                 'driver_id_card' => $driver->driver_id_card,
+                'driver_phone' => $driver->phone_number,
+                'driver_instansi' => $driver->instansi,
                 'scan_time' => $transaction->scan_time->format('d/m/Y H:i'),
                 'points' => $transaction->points_awarded
             ];

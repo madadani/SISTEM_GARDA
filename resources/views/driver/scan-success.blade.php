@@ -113,6 +113,36 @@
             <h2 class="text-xl font-bold text-gray-800 mb-1">Input Data Pasien</h2>
             <p class="text-sm text-gray-500 mb-4">Silakan lengkapi data pasien yang sedang diantar.</p>
 
+            <!-- Informasi Driver -->
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+                <div class="flex items-center mb-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-2">
+                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 text-sm">Informasi Driver</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <span class="text-gray-500 font-medium">Nama:</span>
+                        <span class="text-gray-800 font-medium ml-2">{{ $driver->name }}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 font-medium">ID Card:</span>
+                        <span class="text-gray-800 font-mono bg-white px-2 py-1 rounded ml-2">{{ $driver->driver_id_card }}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 font-medium">No. HP:</span>
+                        <span class="text-gray-800 font-medium ml-2">{{ $driver->phone_number ?? 'Tidak Ada' }}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 font-medium">Instansi:</span>
+                        <span class="text-gray-800 font-medium ml-2">{{ $driver->instansi ?? 'Tidak Ada' }}</span>
+                    </div>
+                </div>
+            </div>
+
             <form action="{{ route('driver.scan.patient.validate', $latestTransaction->id) }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
@@ -132,7 +162,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="p-4 border-2 border-gray-200 rounded-xl">
                             <label class="flex items-center cursor-pointer">
-                                <input type="radio" name="destination" value="IGD" {{ old('destination') === 'IGD' || (session('patient_input_data.destination') === 'IGD') ? 'checked' : '' }} required class="mr-3 text-primary-600 focus:ring-primary-500">
+                                <input type="radio" name="destination" value="IGD" {{ old('destination') === 'IGD' || (session('patient_input_data.destination') === 'IGD') || (!old('destination') && !session('patient_input_data.destination')) ? 'checked' : '' }} required class="mr-3 text-primary-600 focus:ring-primary-500">
                                 <div class="flex-1 flex items-center">
                                     <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/>
@@ -200,7 +230,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-gray-800 text-sm">Data Pasien</h4>
+                        <h4 class="font-semibold text-gray-800 text-sm">Informasi Pasien</h4>
                     </div>
                     <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 ml-2">
                             <div class="flex items-center pb-2">
@@ -223,7 +253,7 @@
                     </div>
                 </div>
                 
-                <!-- Data Driver Section -->
+                <!-- Informasi Driver Section -->
                 <div class="mb-4">
                     <div class="flex items-center mb-3 ml-2">
                         <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-2">
@@ -231,7 +261,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <h4 class="font-semibold text-gray-800 text-sm">Driver Pengantar</h4>
+                        <h4 class="font-semibold text-gray-800 text-sm">Informasi Driver</h4>
                     </div>
                     <div class="bg-green-50 border border-green-200 rounded-xl p-4 ml-2">
                             <div class="flex items-center pb-2">
@@ -243,6 +273,16 @@
                                 <span class="text-xs text-gray-500 font-medium w-16">ID Card</span>
                                 <span class="text-sm text-gray-800 font-medium">:</span>
                                 <span class="text-sm text-gray-800 font-mono bg-white px-2 py-1 rounded ml-2">{{ session('success')['driver_id_card'] }}</span>
+                            </div>
+                            <div class="flex items-center pb-2">
+                                <span class="text-xs text-gray-500 font-medium w-16">Telepon</span>
+                                <span class="text-sm text-gray-800 font-medium">:</span>
+                                <span class="text-sm text-gray-800 font-medium ml-2">{{ session('success')['driver_phone'] ?? 'Tidak Ada' }}</span>
+                            </div>
+                            <div class="flex items-center pb-2">
+                                <span class="text-xs text-gray-500 font-medium w-16">Instansi</span>
+                                <span class="text-sm text-gray-800 font-medium">:</span>
+                                <span class="text-sm text-gray-800 font-medium ml-2">{{ session('success')['driver_instansi'] ?? 'Tidak Ada' }}</span>
                             </div>
                             <div class="flex items-center">
                                 <span class="text-xs text-gray-500 font-medium w-16">Waktu</span>
@@ -256,7 +296,7 @@
                 <!-- Spacing before button -->
                 <div class="mb-4"></div>
                 
-                <!-- Action Button -->
+                <!-- Tombol Aksi -->
                 <div class="flex justify-center px-4">
                     <button type="button" onclick="window.location.href='{{ route('scan.landing') }}'" class="w-full max-w-xs bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold py-2.5 rounded-xl hover:from-emerald-600 hover:to-teal-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
                         <span>Kembali ke Halaman Awal</span>
