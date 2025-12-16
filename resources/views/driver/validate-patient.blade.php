@@ -115,13 +115,16 @@
                                 <!-- Informasi Driver -->
                                 <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
                                     <label class="text-xs font-medium text-blue-600 uppercase tracking-wider">Informasi Driver</label>
-                                    <div class="mt-2 flex items-center">
-                                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">
+                                    <div class="mt-2 flex items-start">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3 flex-shrink-0">
                                             {{ strtoupper(substr($driver->name, 0, 2)) }}
                                         </div>
-                                        <div>
+                                        <div class="flex-1">
                                             <div class="text-sm font-medium text-gray-900">{{ $driver->name }}</div>
-                                            <div class="text-xs text-gray-500">ID Transaksi: {{ $transaction->transaction_id }}</div>
+                                            <div class="text-xs text-gray-500">ID Card: {{ $driver->driver_id_card }}</div>
+                                            <div class="text-xs text-gray-500">No. HP: {{ $driver->phone_number ?? 'Tidak Ada' }}</div>
+                                            <div class="text-xs text-gray-500">Instansi: {{ $driver->instansi ?? 'Tidak Ada' }}</div>
+                                            <div class="text-xs text-gray-500 mt-1">ID Transaksi: {{ $transaction->transaction_id }}</div>
                                         </div>
                                     </div>
                                 </div>
