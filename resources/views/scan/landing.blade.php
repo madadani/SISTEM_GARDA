@@ -249,7 +249,7 @@
         }
         
         try {
-            const response = await fetch(`/api/check-driver/${cleanId}`);
+            const response = await fetch(`api/check-driver/${cleanId}`);
             const data = await response.json();
             
             if (data.exists) {

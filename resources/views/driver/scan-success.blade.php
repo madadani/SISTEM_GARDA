@@ -159,7 +159,7 @@
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closePatientModal()" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 text-sm font-medium">Batal</button>
+                    <button type="button" onclick="window.location.href='{{ route('scan.landing') }}'" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 text-sm font-medium">Batal</button>
                     <button type="submit" class="px-5 py-2 rounded-lg bg-green-600 text-white text-sm font-semibold hover:bg-green-700">Next</button>
                 </div>
             </form>
